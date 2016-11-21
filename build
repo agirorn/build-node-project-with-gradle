@@ -1,2 +1,35 @@
 #!/usr/bin/env bash
-./gradlew grunt_build
+
+set -e
+
+NPM_VERSIONS=( 3.10.7 )
+NODE_VERSIONS=(
+  4.5.0
+  6.5.0
+)
+
+#
+# Setup
+#
+test -f gradlew || cp ./gradle/gradlew .
+test -f build.gradle || ln -s ./gradle/build.gradle .
+
+#
+# Clean up on error and exit
+#
+cleanup () {
+  test -f gradlew && rm ./gradlew
+  test -f build.gradle && rm ./build.gradle
+}
+trap cleanup ERR EXIT
+
+#
+# Build
+#
+for node_version in ${NODE_VERSIONS[*]}; do
+  for npm_version in ${NPM_VERSIONS[*]}; do
+    NODE_VERSION=$node_version \
+    NPM_VERSION=$npm_version \
+    ./gradlew npm_run_builder
+  done
+done

@@ -2,14 +2,14 @@
   "name": "build-node-project-with-gradle",
   "version": "0.0.0",
   "description": "Build node project with gradle",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.4",
-    "grunt-clear": "^0.2.1"
+    "grunt-clear": "^0.2.1",
+    "grunt-cli": "^1.2.0"
   },
   "scripts": {
+    "builder": "grunt build"
   },
-  "keywords": [
-  ]
+  "keywords": []
 }

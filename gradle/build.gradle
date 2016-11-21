@@ -1,0 +1,19 @@
+plugins {
+  id "com.moowork.node" version "0.12"
+}
+
+node {
+  version = "$System.env.NODE_VERSION"
+
+  npmVersion  = "$System.env.NPM_VERSION"
+
+  // Enabled the automatic download. False is the default (for now).
+  download = true
+}
+
+npm_run_builder.dependsOn 'npmInstall'
+
+npm_install {
+  args = ['--loglevel', 'warn']
+}
+
